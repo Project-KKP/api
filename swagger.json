@@ -17,8 +17,7 @@
     {
       "name": "API SIGMA",
       "description": "Operations related to the SIGMA project"
-    }
-  ],
+    },
   "paths": {
     "/api/towers": {
       "get": {
@@ -362,5 +361,6 @@
         }
       }
     }
+    ]
   }
 }
