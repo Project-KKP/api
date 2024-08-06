@@ -13,11 +13,6 @@
       "url": "https://backend-gohddmb5kq-et.a.run.app"
     }
   ],
-  "tags": [
-    {
-      "name": "API SIGMA",
-      "description": "Operations related to the SIGMA project"
-    },
   "paths": {
     "/api/towers": {
       "get": {
@@ -361,6 +356,5 @@
         }
       }
     }
-    ]
   }
 }
