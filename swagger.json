@@ -22,39 +22,39 @@
   "paths": {
     "/api/towers": {
       "get": {
-        "summary": "This API is used to get the towers",
-        "description": "This API is used to check the method",
+        "summary": "Retrieve towers",
+        "description": "This endpoint retrieves information about towers.",
         "responses": {
           "200": {
-            "description": "To test GET method"
+            "description": "A list of towers"
           }
         }
       }
     },
     "/api/reportlength": {
       "get": {
-        "summary": "This API is used to get length from the report",
-        "description": "This API is used to check the method",
+        "summary": "Retrieve report length",
+        "description": "This endpoint retrieves the length of the report.",
         "responses": {
           "200": {
-            "description": "To test GET method"
+            "description": "The length of the report"
           }
         }
       }
     },
     "/api/blankspots": {
       "get": {
-        "summary": "This API is used to get the blankspots",
-        "description": "This API is used to check the method",
+        "summary": "Retrieve blankspots",
+        "description": "This endpoint retrieves information about blankspots.",
         "responses": {
           "200": {
-            "description": "To test GET method"
+            "description": "A list of blankspots"
           }
         }
       },
       "post": {
         "summary": "Create a blankspot",
-        "description": "This API is used to create a blankspot.",
+        "description": "This endpoint creates a new blankspot.",
         "requestBody": {
           "required": true,
           "content": {
@@ -108,7 +108,7 @@
     "/api/blankspots/{id}": {
       "delete": {
         "summary": "Delete a blankspot",
-        "description": "This API is used to delete a blankspot by ID.",
+        "description": "This endpoint deletes a blankspot by ID.",
         "parameters": [
           {
             "name": "id",
@@ -151,7 +151,7 @@
       },
       "put": {
         "summary": "Update a blankspot",
-        "description": "This API is used to update a blankspot.",
+        "description": "This endpoint updates a blankspot.",
         "parameters": [
           {
             "name": "id",
@@ -215,8 +215,8 @@
     },
     "/api/kritik": {
       "post": {
-        "summary": "This API is used to submit feedback",
-        "description": "This API is used to submit feedback",
+        "summary": "Submit feedback",
+        "description": "This endpoint submits feedback.",
         "requestBody": {
           "required": true,
           "content": {
@@ -267,8 +267,8 @@
         }
       },
       "get": {
-        "summary": "Get all feedback",
-        "description": "This API is used to retrieve all feedback.",
+        "summary": "Retrieve all feedback",
+        "description": "This endpoint retrieves all feedback.",
         "parameters": [
           {
             "name": "verifyToken",
@@ -295,8 +295,8 @@
     },
     "/api/report": {
       "post": {
-        "summary": "This API is used to submit a report",
-        "description": "This API is used to submit a report",
+        "summary": "Submit a report",
+        "description": "This endpoint submits a report.",
         "requestBody": {
           "required": true,
           "content": {
