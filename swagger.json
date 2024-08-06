@@ -1,87 +1,97 @@
 {
-    "openapi": "3.0.0",
-    "info": {
-      "title": "API Documentation",
-      "description": "API documentation for the project.",
-      "version": "1.0.0"
+  "openapi": "3.0.0",
+  "info": {
+    "title": "API Documentation",
+    "description": "API documentation for the project.",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:5000"
     },
-    "servers": [
-      {
-        "url": "http://localhost:5000"
-      },{
-        "url": "https://backend-gohddmb5kq-et.a.run.app"
+    {
+      "url": "https://backend-gohddmb5kq-et.a.run.app"
+    }
+  ],
+  "tags": [
+    {
+      "name": "API SIGMA",
+      "description": "Operations related to the SIGMA project"
+    }
+  ],
+  "paths": {
+    "/api/towers": {
+      "get": {
+        "tags": ["API SIGMA"],
+        "summary": "This API is used to get the towers",
+        "description": "This API is used to check the method",
+        "responses": {
+          "200": {
+            "description": "To test GET method"
+          }
+        }
       }
-    ],
-    "paths": {
-      "/api/towers": {
-        "get": {
-          "summary": "This API is used to get the towers",
-          "description": "This API is used to check the method",
-          "responses": {
-            "200": {
-              "description": "To test GET method"
-            }
+    },
+    "/api/reportlength": {
+      "get": {
+        "tags": ["API SIGMA"],
+        "summary": "This API is used to get length from the report",
+        "description": "This API is used to check the method",
+        "responses": {
+          "200": {
+            "description": "To test GET method"
           }
         }
-      },
-      "/api/reportlength": {
-        "get": {
-          "summary": "This API is used to get length from the report",
-          "description": "This API is used to check the method",
-          "responses": {
-            "200": {
-              "description": "To test GET method"
-            }
+      }
+    },
+    "/api/blankspots": {
+      "get": {
+        "tags": ["API SIGMA"],
+        "summary": "This API is used to get the blankspots",
+        "description": "This API is used to check the method",
+        "responses": {
+          "200": {
+            "description": "To test GET method"
           }
         }
-      },
-      "/api/blankspots": {
-        "get": {
-          "summary": "This API is used to get the blankspots",
-          "description": "This API is used to check the method",
-          "responses": {
-            "200": {
-              "description": "To test GET method"
-            }
-          }
-        }
-      },
-      "/api/kritik": {
-        "post": {
-          "summary": "This API is used to submit feedback",
-          "description": "This API is used to submit feedback",
-          "requestBody": {
-            "required": true,
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "nama": {
-                      "type": "string",
-                      "description": "The name of the person giving feedback",
-                      "example": "Testting"
-                    },
-                    "email": {
-                      "type": "string",
-                      "description": "The email of the person giving feedback",
-                      "example": "test@gmail.com"
-                    },
-                    "telepon": {
-                      "type": "string",
-                      "description": "The phone number of the person giving feedback",
-                      "example": "1234567890"
-                    },
-                    "pesan": {
-                      "type": "string",
-                      "description": "The message content of the feedback",
-                      "example": "This is my feedback"
-                    },
-                    "captchaToken": {
-                      "type": "string",
-                      "description": "The reCAPTCHA token for verification",
-                      "example": "6Lc0PRYqAAAAAK2qGCy7UlgZ0ajUyN2SdwoLc4bu"
-                    }
+      }
+    },
+    "/api/kritik": {
+      "post": {
+        "tags": ["API SIGMA"],
+        "summary": "This API is used to submit feedback",
+        "description": "This API is used to submit feedback",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "nama": {
+                    "type": "string",
+                    "description": "The name of the person giving feedback",
+                    "example": "Testting"
+                  },
+                  "email": {
+                    "type": "string",
+                    "description": "The email of the person giving feedback",
+                    "example": "test@gmail.com"
+                  },
+                  "telepon": {
+                    "type": "string",
+                    "description": "The phone number of the person giving feedback",
+                    "example": "1234567890"
+                  },
+                  "pesan": {
+                    "type": "string",
+                    "description": "The message content of the feedback",
+                    "example": "This is my feedback"
+                  },
+                  "captchaToken": {
+                    "type": "string",
+                    "description": "The reCAPTCHA token for verification",
+                    "example": "6Lc0PRYqAAAAAK2qGCy7UlgZ0ajUyN2SdwoLc4bu"
                   }
                 }
               }
@@ -99,63 +109,64 @@
             }
           }
         }
-      },
-      "/api/report": {
-        "post": {
-          "summary": "This API is used to submit a report",
-          "description": "This API is used to submit a report",
-          "requestBody": {
-            "required": true,
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "nama": {
-                      "type": "string",
-                      "description": "The name of the person giving feedback",
-                      "example": "Testting"
-                    },
-                    "email": {
-                      "type": "string",
-                      "description": "The email of the person giving feedback",
-                      "example": "test@gmail.com"
-                    },
-                    "telepon": {
-                      "type": "string",
-                      "description": "The phone number of the person giving feedback",
-                      "example": "1234567890"
-                    },
-                    "lokasi": {
-                      "type": "string",
-                      "description": "The location of the report",
-                      "example": "Mataram"
-                    },
-                    "latitude": {
-                      "type": "string",
-                      "description": "The latitude of the location",
-                      "example": "2313213"
-                    },
-                    "longitude": {
-                      "type": "string",
-                      "description": "The longitude of the location",
-                      "example": "161281"
-                    },
-                    "operator": {
-                      "type": "string",
-                      "description": "The operator related to the report",
-                      "example": "Telkomsel"
-                    },
-                    "keterangan": {
-                      "type": "string",
-                      "description": "Additional details of the report",
-                      "example": "huhuhaha testing"
-                    },
-                    "captchaToken": {
-                      "type": "string",
-                      "description": "The reCAPTCHA token for verification",
-                      "example": "6Lc0PRYqAAAAAK2qGCy7UlgZ0ajUyN2SdwoLc4bu"
-                    }
+      }
+    },
+    "/api/report": {
+      "post": {
+        "tags": ["API SIGMA"],
+        "summary": "This API is used to submit a report",
+        "description": "This API is used to submit a report",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "nama": {
+                    "type": "string",
+                    "description": "The name of the person giving feedback",
+                    "example": "Testting"
+                  },
+                  "email": {
+                    "type": "string",
+                    "description": "The email of the person giving feedback",
+                    "example": "test@gmail.com"
+                  },
+                  "telepon": {
+                    "type": "string",
+                    "description": "The phone number of the person giving feedback",
+                    "example": "1234567890"
+                  },
+                  "lokasi": {
+                    "type": "string",
+                    "description": "The location of the report",
+                    "example": "Mataram"
+                  },
+                  "latitude": {
+                    "type": "string",
+                    "description": "The latitude of the location",
+                    "example": "2313213"
+                  },
+                  "longitude": {
+                    "type": "string",
+                    "description": "The longitude of the location",
+                    "example": "161281"
+                  },
+                  "operator": {
+                    "type": "string",
+                    "description": "The operator related to the report",
+                    "example": "Telkomsel"
+                  },
+                  "keterangan": {
+                    "type": "string",
+                    "description": "Additional details of the report",
+                    "example": "huhuhaha testing"
+                  },
+                  "captchaToken": {
+                    "type": "string",
+                    "description": "The reCAPTCHA token for verification",
+                    "example": "6Lc0PRYqAAAAAK2qGCy7UlgZ0ajUyN2SdwoLc4bu"
                   }
                 }
               }
@@ -173,28 +184,29 @@
             }
           }
         }
-      },
-      "/api/login": {
-        "post": {
-          "summary": "This API is used to login",
-          "description": "This API is used to login",
-          "requestBody": {
-            "required": true,
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "username": {
-                      "type": "string",
-                      "description": "The name of the user",
-                      "example": "hanif"
-                    },
-                    "password": {
-                      "type": "string",
-                      "description": "The password of the user",
-                      "example": "123"
-                    }
+      }
+    },
+    "/api/login": {
+      "post": {
+        "tags": ["API SIGMA"],
+        "summary": "This API is used to login",
+        "description": "This API is used to login",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "username": {
+                    "type": "string",
+                    "description": "The name of the user",
+                    "example": "hanif"
+                  },
+                  "password": {
+                    "type": "string",
+                    "description": "The password of the user",
+                    "example": "123"
                   }
                 }
               }
@@ -212,58 +224,59 @@
             }
           }
         }
-      },
-      "/api/towers/create": {
-        "post": {
-          "summary": "Create a tower",
-          "description": "This API is used to create a tower.",
-          "requestBody": {
-            "required": true,
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "lokasi": {
-                      "type": "string",
-                      "description": "The name of the location",
-                      "example": "Testting"
-                    },
-                    "ketinggian": {
-                      "type": "integer",
-                      "description": "The height of the tower",
-                      "example": 50
-                    },
-                    "operator": {
-                      "type": "string",
-                      "description": "The name of the operator",
-                      "example": "Mataram"
-                    },
-                    "status": {
-                      "type": "string",
-                      "description": "The status of the tower",
-                      "example": "Active"
-                    },
-                    "tipe": {
-                      "type": "string",
-                      "description": "The type of the tower",
-                      "example": "Cellular"
-                    },
-                    "latitude": {
-                      "type": "string",
-                      "description": "The latitude of the tower",
-                      "example": "-8.5833"
-                    },
-                    "longitude": {
-                      "type": "string",
-                      "description": "The longitude of the tower",
-                      "example": "116.1167"
-                    },
-                    "verifyToken": {
-                      "type": "string",
-                      "description": "The token for verification",
-                      "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwidXNlcm5hbWUiOiJIYW5pZiIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTcyMjU2NTI3NSwiZXhwIjoxNzIyNjUxNjc1fQ.sbwsuK0Z3ly_L24zgNZ9THPB5qFp0ciGDCt5o_4gFqo"
-                    }
+      }
+    },
+    "/api/towers/create": {
+      "post": {
+        "tags": ["API SIGMA"],
+        "summary": "Create a tower",
+        "description": "This API is used to create a tower.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "lokasi": {
+                    "type": "string",
+                    "description": "The name of the location",
+                    "example": "Testting"
+                  },
+                  "ketinggian": {
+                    "type": "integer",
+                    "description": "The height of the tower",
+                    "example": 50
+                  },
+                  "operator": {
+                    "type": "string",
+                    "description": "The name of the operator",
+                    "example": "Mataram"
+                  },
+                  "status": {
+                    "type": "string",
+                    "description": "The status of the tower",
+                    "example": "Active"
+                  },
+                  "tipe": {
+                    "type": "string",
+                    "description": "The type of the tower",
+                    "example": "Cellular"
+                  },
+                  "latitude": {
+                    "type": "string",
+                    "description": "The latitude of the tower",
+                    "example": "-8.5833"
+                  },
+                  "longitude": {
+                    "type": "string",
+                    "description": "The longitude of the tower",
+                    "example": "116.1167"
+                  },
+                  "verifyToken": {
+                    "type": "string",
+                    "description": "The token for verification",
+                    "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwidXNlcm5hbWUiOiJIYW5pZiIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTcyMjU2NTI3NSwiZXhwIjoxNzIyNjUxNjc1fQ.sbwsuK0Z3ly_L24zgNZ9THPB5qFp0ciGDCt5o_4gFqo"
                   }
                 }
               }
@@ -284,4 +297,4 @@
       }
     }
   }
-  
+}
