@@ -7,7 +7,7 @@
   },
   "servers": [
     {
-      "url": "https://backend-gohddmb5kq-et.a.run.app"
+      "url": "https://backend-gohddmb5kq-et.a.run.app/api"
     }
   ],
   "paths": {
