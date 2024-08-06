@@ -44,7 +44,6 @@
     },
     "/api/blankspots": {
       "get": {
-        "tags": ["API SIGMA"],
         "summary": "This API is used to get the blankspots",
         "description": "This API is used to check the method",
         "responses": {
