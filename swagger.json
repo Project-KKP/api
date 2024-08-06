@@ -1,117 +1,86 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "API Documentation",
-    "description": "API documentation for the project.",
-    "version": "1.0.0"
+    "title": "API SIG Menara Telekomunikasi dan Blankspot",
+    "version": "1.0.0",
+    "description": "API for managing towers, blankspots, reports, and user authentication"
   },
-  "servers": [
-    {
-      "url": "http://localhost:5000"
-    },
-    {
-      "url": "https://backend-gohddmb5kq-et.a.run.app"
-    }
-  ],
   "paths": {
-    "/api/towers": {
-      "get": {
-        "summary": "Retrieve towers",
-        "description": "This endpoint retrieves information about towers.",
-        "responses": {
-          "200": {
-            "description": "A list of towers"
-          }
-        }
-      }
-    },
-    "/api/reportlength": {
-      "get": {
-        "summary": "Retrieve report length",
-        "description": "This endpoint retrieves the length of the report.",
-        "responses": {
-          "200": {
-            "description": "The length of the report"
-          }
-        }
-      }
-    },
-    "/api/blankspots": {
-      "get": {
-        "summary": "Retrieve blankspots",
-        "description": "This endpoint retrieves information about blankspots.",
-        "responses": {
-          "200": {
-            "description": "A list of blankspots"
-          }
-        }
-      },
+    "/login": {
       "post": {
-        "summary": "Create a blankspot",
-        "description": "This endpoint creates a new blankspot.",
+        "summary": "User login",
+        "tags": ["Authentication"],
         "requestBody": {
           "required": true,
           "content": {
             "application/json": {
               "schema": {
-                "type": "object",
-                "properties": {
-                  "lokasi": {
-                    "type": "string",
-                    "description": "The location of the blankspot",
-                    "example": "Location Example"
-                  },
-                  "operator": {
-                    "type": "string",
-                    "description": "The operator related to the blankspot",
-                    "example": "Telkomsel"
-                  },
-                  "latitude": {
-                    "type": "string",
-                    "description": "The latitude of the location",
-                    "example": "-8.5833"
-                  },
-                  "longitude": {
-                    "type": "string",
-                    "description": "The longitude of the location",
-                    "example": "116.1167"
-                  },
-                  "verifyToken": {
-                    "type": "string",
-                    "description": "The token for verification",
-                    "example": "example_token"
-                  }
-                }
+                "$ref": "#/components/schemas/LoginRequest"
               }
             }
           }
         },
         "responses": {
           "200": {
-            "description": "Blankspot created successfully"
-          },
-          "400": {
-            "description": "Bad request"
-          },
-          "401": {
-            "description": "Invalid token"
+            "description": "Successful login",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LoginResponse"
+                }
+              }
+            }
           }
         }
       }
     },
-    "/api/blankspots/{id}": {
-      "delete": {
-        "summary": "Delete a blankspot",
-        "description": "This endpoint deletes a blankspot by ID.",
-        "parameters": [
+    "/register": {
+      "post": {
+        "summary": "User registration",
+        "tags": ["Authentication"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RegisterRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "User registered successfully"
+          }
+        }
+      }
+    },
+    "/towers": {
+      "get": {
+        "summary": "Get all towers",
+        "tags": ["Towers"],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Tower"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Create a new tower",
+        "tags": ["Towers"],
+        "security": [
           {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "The ID of the blankspot"
+            "BearerAuth": []
           }
         ],
         "requestBody": {
@@ -119,42 +88,164 @@
           "content": {
             "application/json": {
               "schema": {
-                "type": "object",
-                "properties": {
-                  "verifyToken": {
-                    "type": "string",
-                    "description": "The token for verification",
-                    "example": "example_token"
-                  }
-                }
+                "$ref": "#/components/schemas/Tower"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Tower created successfully"
+          }
+        }
+      }
+    },
+    "/towers/{id}": {
+      "put": {
+        "summary": "Update a tower",
+        "tags": ["Towers"],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Tower"
               }
             }
           }
         },
         "responses": {
           "200": {
+            "description": "Tower updated successfully"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete a tower",
+        "tags": ["Towers"],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Tower deleted successfully"
+          }
+        }
+      }
+    },
+    "/blankspots": {
+      "post": {
+        "summary": "Create a new blankspot",
+        "tags": ["Blankspots"],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Blankspot"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Blankspot created successfully"
+          }
+        }
+      },
+      "get": {
+        "summary": "Get all blankspots",
+        "tags": ["Blankspots"],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Blankspot"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/blankspots/{id}": {
+      "delete": {
+        "summary": "Delete a blankspot",
+        "tags": ["Blankspots"],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
             "description": "Blankspot deleted successfully"
-          },
-          "400": {
-            "description": "Bad request"
-          },
-          "401": {
-            "description": "Invalid token"
           }
         }
       },
       "put": {
         "summary": "Update a blankspot",
-        "description": "This endpoint updates a blankspot.",
+        "tags": ["Blankspots"],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
         "parameters": [
           {
-            "name": "id",
             "in": "path",
+            "name": "id",
             "required": true,
             "schema": {
               "type": "string"
-            },
-            "description": "The ID of the blankspot"
+            }
           }
         ],
         "requestBody": {
@@ -162,34 +253,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "type": "object",
-                "properties": {
-                  "lokasi": {
-                    "type": "string",
-                    "description": "The location of the blankspot",
-                    "example": "Updated Location"
-                  },
-                  "operator": {
-                    "type": "string",
-                    "description": "The operator related to the blankspot",
-                    "example": "Updated Operator"
-                  },
-                  "latitude": {
-                    "type": "string",
-                    "description": "The latitude of the location",
-                    "example": "-8.5833"
-                  },
-                  "longitude": {
-                    "type": "string",
-                    "description": "The longitude of the location",
-                    "example": "116.1167"
-                  },
-                  "verifyToken": {
-                    "type": "string",
-                    "description": "The token for verification",
-                    "example": "example_token"
-                  }
-                }
+                "$ref": "#/components/schemas/Blankspot"
               }
             }
           }
@@ -197,163 +261,254 @@
         "responses": {
           "200": {
             "description": "Blankspot updated successfully"
-          },
-          "400": {
-            "description": "Bad request"
-          },
-          "401": {
-            "description": "Invalid token"
           }
         }
       }
     },
-    "/api/kritik": {
-      "post": {
-        "summary": "Submit feedback",
-        "description": "This endpoint submits feedback.",
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "nama": {
-                    "type": "string",
-                    "description": "The name of the person giving feedback",
-                    "example": "Testting"
-                  },
-                  "email": {
-                    "type": "string",
-                    "description": "The email of the person giving feedback",
-                    "example": "test@gmail.com"
-                  },
-                  "telepon": {
-                    "type": "string",
-                    "description": "The phone number of the person giving feedback",
-                    "example": "1234567890"
-                  },
-                  "pesan": {
-                    "type": "string",
-                    "description": "The message content of the feedback",
-                    "example": "This is my feedback"
-                  },
-                  "captchaToken": {
-                    "type": "string",
-                    "description": "The reCAPTCHA token for verification",
-                    "example": "6Lc0PRYqAAAAAK2qGCy7UlgZ0ajUyN2SdwoLc4bu"
+    "/reportlength": {
+      "get": {
+        "summary": "Get report length",
+        "tags": ["Reports"],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "length": {
+                      "type": "integer"
+                    }
                   }
                 }
               }
             }
           }
+        }
+      }
+    },
+    "/report": {
+      "post": {
+        "summary": "Create a new report",
+        "tags": ["Reports"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Report"
+              }
+            }
+          }
         },
         "responses": {
-          "200": {
-            "description": "Feedback submitted successfully"
-          },
-          "400": {
-            "description": "Bad request"
-          },
-          "401": {
-            "description": "Invalid captcha token"
+          "201": {
+            "description": "Report created successfully"
           }
         }
       },
       "get": {
-        "summary": "Retrieve all feedback",
-        "description": "This endpoint retrieves all feedback.",
-        "parameters": [
+        "summary": "Get all reports",
+        "tags": ["Reports"],
+        "security": [
           {
-            "name": "verifyToken",
-            "in": "query",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "The token for verification"
+            "BearerAuth": []
           }
         ],
         "responses": {
           "200": {
-            "description": "Feedback retrieved successfully"
-          },
-          "400": {
-            "description": "Bad request"
-          },
-          "401": {
-            "description": "Invalid token"
-          }
-        }
-      }
-    },
-    "/api/report": {
-      "post": {
-        "summary": "Submit a report",
-        "description": "This endpoint submits a report.",
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "nama": {
-                    "type": "string",
-                    "description": "The name of the person giving feedback",
-                    "example": "Testting"
-                  },
-                  "email": {
-                    "type": "string",
-                    "description": "The email of the person giving feedback",
-                    "example": "test@gmail.com"
-                  },
-                  "telepon": {
-                    "type": "string",
-                    "description": "The phone number of the person giving feedback",
-                    "example": "1234567890"
-                  },
-                  "lokasi": {
-                    "type": "string",
-                    "description": "The location of the report",
-                    "example": "Mataram"
-                  },
-                  "latitude": {
-                    "type": "string",
-                    "description": "The latitude of the location",
-                    "example": "2313213"
-                  },
-                  "longitude": {
-                    "type": "string",
-                    "description": "The longitude of the location",
-                    "example": "2412414"
-                  },
-                  "pesan": {
-                    "type": "string",
-                    "description": "The message content of the report",
-                    "example": "This is my report"
-                  },
-                  "captchaToken": {
-                    "type": "string",
-                    "description": "The reCAPTCHA token for verification",
-                    "example": "6Lc0PRYqAAAAAK2qGCy7UlgZ0ajUyN2SdwoLc4bu"
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Report"
                   }
                 }
               }
             }
           }
+        }
+      }
+    },
+    "/kritik": {
+      "post": {
+        "summary": "Create a new kritik",
+        "tags": ["Kritik"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Kritik"
+              }
+            }
+          }
         },
         "responses": {
-          "200": {
-            "description": "Report submitted successfully"
-          },
-          "400": {
-            "description": "Bad request"
-          },
-          "401": {
-            "description": "Invalid captcha token"
+          "201": {
+            "description": "Kritik created successfully"
           }
         }
+      },
+      "get": {
+        "summary": "Get all kritik",
+        "tags": ["Kritik"],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Kritik"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "LoginRequest": {
+        "type": "object",
+        "properties": {
+          "username": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          }
+        }
+      },
+      "LoginResponse": {
+        "type": "object",
+        "properties": {
+          "token": {
+            "type": "string"
+          }
+        }
+      },
+      "RegisterRequest": {
+        "type": "object",
+        "properties": {
+          "username": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          }
+        }
+      },
+      "Tower": {
+        "type": "object",
+        "properties": {
+          "lokasi": {
+            "type": "string"
+          },
+          "ketinggian": {
+            "type": "number"
+          },
+          "operator": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string"
+          },
+          "tipe": {
+            "type": "string"
+          },
+          "latitude": {
+            "type": "number"
+          },
+          "longitude": {
+            "type": "number"
+          }
+        }
+      },
+      "Blankspot": {
+        "type": "object",
+        "properties": {
+          "lokasi": {
+            "type": "string"
+          },
+          "operator": {
+            "type": "string"
+          },
+          "latitude": {
+            "type": "number"
+          },
+          "longitude": {
+            "type": "number"
+          }
+        }
+      },
+      "Report": {
+        "type": "object",
+        "properties": {
+          "nama": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "telepon": {
+            "type": "string"
+          },
+          "lokasi": {
+            "type": "string"
+          },
+          "latitude": {
+            "type": "number"
+          },
+          "longitude": {
+            "type": "number"
+          },
+          "operator": {
+            "type": "string"
+          },
+          "imgurl": {
+            "type": "string"
+          },
+          "keterangan": {
+            "type": "string"
+          }
+        }
+      },
+      "Kritik": {
+        "type": "object",
+        "properties": {
+          "nama": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "telepon": {
+            "type": "string"
+          },
+          "pesan": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "BearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
       }
     }
   }
