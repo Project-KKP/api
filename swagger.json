@@ -22,7 +22,6 @@
   "paths": {
     "/api/towers": {
       "get": {
-        "tags": ["API SIGMA"],
         "summary": "This API is used to get the towers",
         "description": "This API is used to check the method",
         "responses": {
@@ -34,7 +33,6 @@
     },
     "/api/reportlength": {
       "get": {
-        "tags": ["API SIGMA"],
         "summary": "This API is used to get length from the report",
         "description": "This API is used to check the method",
         "responses": {
@@ -54,11 +52,170 @@
             "description": "To test GET method"
           }
         }
+      },
+      "post": {
+        "summary": "Create a blankspot",
+        "description": "This API is used to create a blankspot.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "lokasi": {
+                    "type": "string",
+                    "description": "The location of the blankspot",
+                    "example": "Location Example"
+                  },
+                  "operator": {
+                    "type": "string",
+                    "description": "The operator related to the blankspot",
+                    "example": "Telkomsel"
+                  },
+                  "latitude": {
+                    "type": "string",
+                    "description": "The latitude of the location",
+                    "example": "-8.5833"
+                  },
+                  "longitude": {
+                    "type": "string",
+                    "description": "The longitude of the location",
+                    "example": "116.1167"
+                  },
+                  "verifyToken": {
+                    "type": "string",
+                    "description": "The token for verification",
+                    "example": "example_token"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Blankspot created successfully"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "401": {
+            "description": "Invalid token"
+          }
+        }
+      }
+    },
+    "/api/blankspots/{id}": {
+      "delete": {
+        "summary": "Delete a blankspot",
+        "description": "This API is used to delete a blankspot by ID.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "The ID of the blankspot"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "verifyToken": {
+                    "type": "string",
+                    "description": "The token for verification",
+                    "example": "example_token"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Blankspot deleted successfully"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "401": {
+            "description": "Invalid token"
+          }
+        }
+      },
+      "put": {
+        "summary": "Update a blankspot",
+        "description": "This API is used to update a blankspot.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "The ID of the blankspot"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "lokasi": {
+                    "type": "string",
+                    "description": "The location of the blankspot",
+                    "example": "Updated Location"
+                  },
+                  "operator": {
+                    "type": "string",
+                    "description": "The operator related to the blankspot",
+                    "example": "Updated Operator"
+                  },
+                  "latitude": {
+                    "type": "string",
+                    "description": "The latitude of the location",
+                    "example": "-8.5833"
+                  },
+                  "longitude": {
+                    "type": "string",
+                    "description": "The longitude of the location",
+                    "example": "116.1167"
+                  },
+                  "verifyToken": {
+                    "type": "string",
+                    "description": "The token for verification",
+                    "example": "example_token"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Blankspot updated successfully"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "401": {
+            "description": "Invalid token"
+          }
+        }
       }
     },
     "/api/kritik": {
       "post": {
-        "tags": ["API SIGMA"],
         "summary": "This API is used to submit feedback",
         "description": "This API is used to submit feedback",
         "requestBody": {
@@ -95,25 +252,50 @@
                   }
                 }
               }
-            },
-            "responses": {
-              "200": {
-                "description": "Feedback submitted successfully"
-              },
-              "400": {
-                "description": "Bad request"
-              },
-              "401": {
-                "description": "Invalid captcha token"
-              }
             }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Feedback submitted successfully"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "401": {
+            "description": "Invalid captcha token"
+          }
+        }
+      },
+      "get": {
+        "summary": "Get all feedback",
+        "description": "This API is used to retrieve all feedback.",
+        "parameters": [
+          {
+            "name": "verifyToken",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "The token for verification"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Feedback retrieved successfully"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "401": {
+            "description": "Invalid token"
           }
         }
       }
     },
     "/api/report": {
       "post": {
-        "tags": ["API SIGMA"],
         "summary": "This API is used to submit a report",
         "description": "This API is used to submit a report",
         "requestBody": {
@@ -170,25 +352,50 @@
                   }
                 }
               }
-            },
-            "responses": {
-              "200": {
-                "description": "Report submitted successfully"
-              },
-              "400": {
-                "description": "Bad request"
-              },
-              "401": {
-                "description": "Invalid captcha token"
-              }
             }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Report submitted successfully"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "401": {
+            "description": "Invalid captcha token"
+          }
+        }
+      },
+      "get": {
+        "summary": "Get all reports",
+        "description": "This API is used to retrieve all reports.",
+        "parameters": [
+          {
+            "name": "verifyToken",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "The token for verification"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Reports retrieved successfully"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "401": {
+            "description": "Invalid token"
           }
         }
       }
     },
     "/api/login": {
       "post": {
-        "tags": ["API SIGMA"],
         "summary": "This API is used to login",
         "description": "This API is used to login",
         "requestBody": {
@@ -210,27 +417,73 @@
                   }
                 }
               }
-            },
-            "responses": {
-              "200": {
-                "description": "Login successful"
-              },
-              "400": {
-                "description": "Bad request"
-              },
-              "401": {
-                "description": "Invalid username or password"
-              }
             }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Login successful"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "401": {
+            "description": "Invalid username or password"
           }
         }
       }
     },
-    "/api/towers/create": {
+    "/api/register": {
       "post": {
-        "tags": ["API SIGMA"],
-        "summary": "Create a tower",
-        "description": "This API is used to create a tower.",
+        "summary": "This API is used to register",
+        "description": "This API is used to register",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "username": {
+                    "type": "string",
+                    "description": "The username of the new user",
+                    "example": "newuser"
+                  },
+                  "password": {
+                    "type": "string",
+                    "description": "The password of the new user",
+                    "example": "newpassword"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Registration successful"
+          },
+          "400": {
+            "description": "Bad request"
+          }
+        }
+      }
+    },
+    "/api/towers/{id}": {
+      "put": {
+        "summary": "Update a tower",
+        "description": "This API is used to update a tower.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "The ID of the tower"
+          }
+        ],
         "requestBody": {
           "required": true,
           "content": {
@@ -240,61 +493,74 @@
                 "properties": {
                   "lokasi": {
                     "type": "string",
-                    "description": "The name of the location",
-                    "example": "Testting"
+                    "description": "The location of the tower",
+                    "example": "Updated Location"
                   },
                   "ketinggian": {
                     "type": "integer",
                     "description": "The height of the tower",
-                    "example": 50
+                    "example": 60
                   },
                   "operator": {
                     "type": "string",
-                    "description": "The name of the operator",
-                    "example": "Mataram"
+                    "description": "The operator related to the tower",
+                    "example": "Updated Operator"
                   },
                   "status": {
                     "type": "string",
                     "description": "The status of the tower",
-                    "example": "Active"
+                    "example": "Inactive"
                   },
                   "tipe": {
                     "type": "string",
                     "description": "The type of the tower",
-                    "example": "Cellular"
+                    "example": "Updated Type"
                   },
                   "latitude": {
                     "type": "string",
-                    "description": "The latitude of the tower",
+                    "description": "The latitude of the location",
                     "example": "-8.5833"
                   },
                   "longitude": {
                     "type": "string",
-                    "description": "The longitude of the tower",
+                    "description": "The longitude of the location",
                     "example": "116.1167"
                   },
                   "verifyToken": {
                     "type": "string",
                     "description": "The token for verification",
-                    "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwidXNlcm5hbWUiOiJIYW5pZiIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTcyMjU2NTI3NSwiZXhwIjoxNzIyNjUxNjc1fQ.sbwsuK0Z3ly_L24zgNZ9THPB5qFp0ciGDCt5o_4gFqo"
+                    "example": "example_token"
                   }
                 }
               }
-            },
-            "responses": {
-              "200": {
-                "description": "Tower submitted successfully"
-              },
-              "400": {
-                "description": "Bad request"
-              },
-              "401": {
-                "description": "Invalid token"
-              }
             }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Tower updated successfully"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "401": {
+            "description": "Invalid token"
           }
         }
       }
+    },
+    "/api/towers/id": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "query",
+          "required": true,
+          "schema": {
+            "type": "string"
+          },
+          "description": "The ID of the tower"
+        }
+      ]
     }
   }
 }
