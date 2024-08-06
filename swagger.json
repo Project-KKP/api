@@ -7,13 +7,16 @@
   },
   "servers": [
     {
+      "url": "http://localhost:5000"
+    },
+    {
       "url": "https://backend-gohddmb5kq-et.a.run.app"
     }
   ],
   "tags": [
     {
-      "name": "API Endpoint",
-      "description": "Operations related to this project"
+      "name": "API SIGMA",
+      "description": "Operations related to the SIGMA project"
     }
   ],
   "paths": {
@@ -329,17 +332,12 @@
                   "longitude": {
                     "type": "string",
                     "description": "The longitude of the location",
-                    "example": "161281"
+                    "example": "2412414"
                   },
-                  "operator": {
+                  "pesan": {
                     "type": "string",
-                    "description": "The operator related to the report",
-                    "example": "Telkomsel"
-                  },
-                  "keterangan": {
-                    "type": "string",
-                    "description": "Additional details of the report",
-                    "example": "huhuhaha testing"
+                    "description": "The message content of the report",
+                    "example": "This is my report"
                   },
                   "captchaToken": {
                     "type": "string",
@@ -362,201 +360,7 @@
             "description": "Invalid captcha token"
           }
         }
-      },
-      "get": {
-        "summary": "Get all reports",
-        "description": "This API is used to retrieve all reports.",
-        "parameters": [
-          {
-            "name": "verifyToken",
-            "in": "query",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "The token for verification"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Reports retrieved successfully"
-          },
-          "400": {
-            "description": "Bad request"
-          },
-          "401": {
-            "description": "Invalid token"
-          }
-        }
       }
-    },
-    "/api/login": {
-      "post": {
-        "summary": "This API is used to login",
-        "description": "This API is used to login",
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "username": {
-                    "type": "string",
-                    "description": "The name of the user",
-                    "example": "hanif"
-                  },
-                  "password": {
-                    "type": "string",
-                    "description": "The password of the user",
-                    "example": "123"
-                  }
-                }
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Login successful"
-          },
-          "400": {
-            "description": "Bad request"
-          },
-          "401": {
-            "description": "Invalid username or password"
-          }
-        }
-      }
-    },
-    "/api/register": {
-      "post": {
-        "summary": "This API is used to register",
-        "description": "This API is used to register",
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "username": {
-                    "type": "string",
-                    "description": "The username of the new user",
-                    "example": "newuser"
-                  },
-                  "password": {
-                    "type": "string",
-                    "description": "The password of the new user",
-                    "example": "newpassword"
-                  }
-                }
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Registration successful"
-          },
-          "400": {
-            "description": "Bad request"
-          }
-        }
-      }
-    },
-    "/api/towers/{id}": {
-      "put": {
-        "summary": "Update a tower",
-        "description": "This API is used to update a tower.",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "The ID of the tower"
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "lokasi": {
-                    "type": "string",
-                    "description": "The location of the tower",
-                    "example": "Updated Location"
-                  },
-                  "ketinggian": {
-                    "type": "integer",
-                    "description": "The height of the tower",
-                    "example": 60
-                  },
-                  "operator": {
-                    "type": "string",
-                    "description": "The operator related to the tower",
-                    "example": "Updated Operator"
-                  },
-                  "status": {
-                    "type": "string",
-                    "description": "The status of the tower",
-                    "example": "Inactive"
-                  },
-                  "tipe": {
-                    "type": "string",
-                    "description": "The type of the tower",
-                    "example": "Updated Type"
-                  },
-                  "latitude": {
-                    "type": "string",
-                    "description": "The latitude of the location",
-                    "example": "-8.5833"
-                  },
-                  "longitude": {
-                    "type": "string",
-                    "description": "The longitude of the location",
-                    "example": "116.1167"
-                  },
-                  "verifyToken": {
-                    "type": "string",
-                    "description": "The token for verification",
-                    "example": "example_token"
-                  }
-                }
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Tower updated successfully"
-          },
-          "400": {
-            "description": "Bad request"
-          },
-          "401": {
-            "description": "Invalid token"
-          }
-        }
-      }
-    },
-    "/api/towers/id": {
-      "parameters": [
-        {
-          "name": "id",
-          "in": "query",
-          "required": true,
-          "schema": {
-            "type": "string"
-          },
-          "description": "The ID of the tower"
-        }
-      ]
     }
   }
 }
