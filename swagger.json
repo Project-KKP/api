@@ -7,16 +7,13 @@
   },
   "servers": [
     {
-      "url": "http://localhost:5000"
-    },
-    {
       "url": "https://backend-gohddmb5kq-et.a.run.app"
     }
   ],
   "tags": [
     {
-      "name": "API SIGMA",
-      "description": "Operations related to the SIGMA project"
+      "name": "API Endpoint",
+      "description": "Operations related to this project"
     }
   ],
   "paths": {
