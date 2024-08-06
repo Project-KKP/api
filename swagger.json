@@ -5,6 +5,11 @@
     "version": "1.0.0",
     "description": "API for managing towers, blankspots, reports, and user authentication"
   },
+  "servers": [
+    {
+      "url": "https://backend-gohddmb5kq-et.a.run.app"
+    }
+  ],
   "paths": {
     "/login": {
       "post": {
