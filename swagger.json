@@ -488,6 +488,9 @@
           },
           "keterangan": {
             "type": "string"
+          },
+          "captcha": {
+            "type": "string"
           }
         }
       },
@@ -504,6 +507,9 @@
             "type": "string"
           },
           "pesan": {
+            "type": "string"
+          },
+          "captcha": {
             "type": "string"
           }
         }
